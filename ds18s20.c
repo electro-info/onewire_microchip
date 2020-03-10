@@ -45,19 +45,3 @@ void ow_readROM(owByte* owROM) {
     
     for(i=0; i<8 ; i++) owROM[i] = ow_readByte();
 }
-
-owByte crc8(owByte *addr, owByte len) {
-    owByte i, crc, inbyte, mix;
-    crc = 0;
-    
-    while(len--) {
-        inbyte = *addr++;
-        for(i=8 ; i ; i--) {
-            mix = (crc ^ inbyte) & 0x01;
-            crc >>= 1;
-            if(mix) crc ^= 0x8C;
-            inbyte >>= 1;
-        }
-    }
-    return crc;
-}

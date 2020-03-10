@@ -1,4 +1,4 @@
-/* 
+    /* 
  * File:   ds18s20.h
  * Author:  SD
  *
@@ -28,17 +28,21 @@ extern "C" {
 /**
  * Initialise la GPIO DQ du bus OneWire. Fait un reset du bus OneWire, 
  * si un périphérique est connecté, il doit répondre
+ * 
+ * @author SD
  * @return TRUE ou FALSE selon si un capteur à répondu ou pas
  */
 owByte ow_DS18S20_init();
 /**
  * Envoie l'ordre au capteur de réaliser une convertion de température
+ * 
  * @author SD
  * @return TRUE ou FALSE selon si un capteur à répondu ou pas
  */   
 owByte ow_DS18S20_startTempConvAll();
 /**
- *  Lit la mémoire interne du capteur (tableau de 9 octets appelé SCRATCHPAD)
+ * Lit la mémoire interne du capteur (tableau de 9 octets appelé SCRATCHPAD)
+ * 
  * @author SD
  * @param owPAD : pointeur sur un tableau de 9 octets pour stocker le résultat de la lecture
  * @return TRUE ou FALSE selon si un capteur à répondu ou pas  
@@ -46,6 +50,7 @@ owByte ow_DS18S20_startTempConvAll();
 owByte ow_DS1820_readScratchPad(owByte* owPAD);
 /**
  * Convertit les valeurs lues dans le scratchpad en une valeur en degrés Celcius
+ * 
  * @param lsb : premier octet du scratchpad
  * @param msb : deuxième octet du scratchpad
  * @return la température en degrés Celcius (float)
@@ -53,8 +58,6 @@ owByte ow_DS1820_readScratchPad(owByte* owPAD);
 float ow_DS1820_getTemp(owByte lsb, owByte msb);
 
 void ow_readROM(owByte*);
-
-owByte crc8(owByte* , owByte);
 
 #ifdef	__cplusplus
 }
@@ -69,9 +72,11 @@ void main(void)
     SYSTEM_Initialize();
 
     owByte get[DS18S20_SCRATCHPAD_SIZE];
+
     if(!ow_DS18S20_init())
         printf("\r\nERREUR DS18S20_init : Le capteur ne repond pas\r\n");
-    
+    __delay_ms(2000);
+
     while (1)
     {
         if(ow_DS18S20_startTempConvAll()) {

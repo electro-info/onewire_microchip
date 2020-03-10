@@ -14,6 +14,7 @@
       </logicalFolder>
       <itemPath>ds18s20.h</itemPath>
       <itemPath>oneWire.h</itemPath>
+      <itemPath>ds2401.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -33,6 +34,7 @@
       <itemPath>main.c</itemPath>
       <itemPath>ds18s20.c</itemPath>
       <itemPath>oneWire.c</itemPath>
+      <itemPath>ds2401.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

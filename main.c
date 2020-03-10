@@ -43,6 +43,7 @@
 
 #include "mcc_generated_files/mcc.h"
 #include "ds18s20.h"
+#include "ds2401.h"
 /*
                          Main application
  */
@@ -66,20 +67,39 @@ void main(void)
     // Disable the Peripheral Interrupts
     //INTERRUPT_PeripheralInterruptDisable();
 
-    owByte get[DS18S20_SCRATCHPAD_SIZE];
+    /*owByte get[DS18S20_SCRATCHPAD_SIZE];
     if(!ow_DS18S20_init())
         printf("\r\nERREUR DS18S20_init : Le capteur ne repond pas\r\n");
     __delay_ms(2000);
+    */
     
+    owByte owRom[DS2401_MEMORY_SIZE];
+    
+    if(ow_DS2401_init()) {
+        if(ow_DS2401_getID(owRom)) {  
+            char str[13];
+            owDS2401_ID_To_String(owRom, str);
+            printf("ID : %s\r\n",str);
+        }
+        else {
+            printf("ERREUR, \"Familly code\" invalide ou CRC invalide\r\n");
+        }
+    }
+    else {
+        printf("ERREUR, périphérique OneWire non détecté ou ne répond pas\r\n");
+    }
+        
     while (1)
     {
         // Add your application code
-        if(ow_DS18S20_startTempConvAll()) {
+        /*if(ow_DS18S20_startTempConvAll()) {
             __delay_ms(500);
             if(ow_DS1820_readScratchPad(get)) {
                 printf("T : %.1f\r\n",ow_DS1820_getTemp(get[0],get[1]));
             } else printf("\r\nERREUR readScratchPad : Le capteur ne repond pas\r\n");
         } else printf("\r\nERREUR startTempConvAll : Le capteur ne repond pas\r\n");
+         */
+        
     }
 }
 /**

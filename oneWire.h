@@ -39,36 +39,55 @@ typedef unsigned char owByte;
  * @author : SD
  */
 void ow_init();
+
+
 /**
  * Initialise le bus OneWire, si un périphérique est connecté, il doit répondre
  * @author SD
  * @return TRUE si un prériphérique est détecté, FALSE sinon
  */
 owByte ow_reset();
+
+
 /**
  * Lit un bit reçu sur le bus OneWire
  * @author SD
  * @return la valeur du bit lu : 0 ou 1
  */
 owByte ow_readBit();
+
+
 /**
  * Ecrit un bit sur le bus OneWire
  * @author SD
  * @param la valeur du bit à écrire : 0 ou 1
  */
 void ow_writeBit(owByte);
+
+
 /**
  * Lit un octet reçu sur le bus OneWire
  * @author SD
  * @return la valeur du l'octet reçu
  */
 owByte ow_readByte();
+
+
 /**
  * Ecrit un octet sur le bus OneWire
  * @author SD
  * @param la valeur du l'octet à envoyer
  */
 void ow_writeByte(owByte);        
+
+
+/**
+ * Calcul le CRC d'un tableau d'octets (usage interne seulement)
+ * @param pointeur sue le tableau
+ * @param taille du tableau
+ * @return le CRC calculé
+ */
+owByte crc8(owByte* , owByte);
 
 #ifdef	__cplusplus
 }
